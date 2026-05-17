@@ -1,5 +1,5 @@
 <?php
-$host = 'localhost';     // host database
+$host = '127.0.0.1';     // Gunakan IP, bukan 'localhost', agar PHP konek via TCP ke Docker MySQL
 $user = 'root';          // username database
 $pass = '123456';        // password database (kosongkan jika default XAMPP)
 $db   = 'rebelstuff';    // nama database kamu
