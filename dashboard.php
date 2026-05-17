@@ -12,24 +12,19 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// --- Fungsi Helper untuk Gambar (Tetap menggunakan product_images2) ---
-// Fungsi untuk mengunggah banyak gambar
+// --- Fungsi Helper untuk Gambar (Menggunakan Cloudinary) ---
 function uploadImages($files, $productId, $conn) {
-    $targetDir = "uploads/";
+    $cloudName = 'dohpfdgki';
+    $apiKey = '457681439374983';
+    $apiSecret = 'KQrrTLwwIEUFFT65-bzFgIiAkFM';
+    $folder = 'rebelstuff';
+    
     $uploadedImages = [];
-
-    if (!is_dir($targetDir)) {
-        mkdir($targetDir, 0777, true);
-    }
-
     $fileNames = $files['name'];
     $tmpNames = $files['tmp_name'];
     $errors = $files['error'];
     $fileCounts = count($fileNames);
 
-    $stmt_insert_image = null;
-
-    // *** Pastikan nama tabel gambar sesuai, contoh: product_images2 ***
     $stmt_insert_image = $conn->prepare("INSERT INTO product_images2 (product_id, image_filename) VALUES (?, ?)");
     if ($stmt_insert_image === false) {
         error_log("Error preparing INSERT statement for images: " . $conn->error);
@@ -41,47 +36,66 @@ function uploadImages($files, $productId, $conn) {
         $tmpName = $tmpNames[$i];
         $error = $errors[$i];
 
-        if ($error != UPLOAD_ERR_OK || empty($fileName)) {
-            if ($error != UPLOAD_ERR_NO_FILE) {
-                 error_log("File upload error for index " . $i . ": Code " . $error . " Filename: " . $fileName);
-            }
+        if ($error != UPLOAD_ERR_OK || empty($fileName) || $error == UPLOAD_ERR_NO_FILE) {
             continue;
         }
 
-        $targetFile = $targetDir . $fileName;
         $uploadOk = true;
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
         $check = getimagesize($tmpName);
         if ($check === false) {
-             error_log("File is not a valid image: " . $fileName);
              $uploadOk = false;
         }
 
         // Izinkan format file tertentu
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-             error_log("Sorry, only JPG, JPEG, PNG & GIF files are allowed: " . $fileName);
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "webp") {
              $uploadOk = false;
         }
 
-        if ($uploadOk == false) {
-             error_log("Image upload failed validation for file: " . $fileName);
-        } else {
-            if (move_uploaded_file($tmpName, $targetFile)) {
-                $stmt_insert_image->bind_param("is", $productId, $fileName);
+        if ($uploadOk) {
+            // Upload to Cloudinary via cURL API
+            $timestamp = time();
+            $signatureString = "folder=" . $folder . "&timestamp=" . $timestamp . $apiSecret;
+            $signature = sha1($signatureString);
+
+            $ch = curl_init("https://api.cloudinary.com/v1_1/" . $cloudName . "/image/upload");
+            
+            // Create CURLFile
+            $cfile = new CURLFile($tmpName, mime_content_type($tmpName), $fileName);
+
+            $postParams = [
+                'file' => $cfile,
+                'timestamp' => $timestamp,
+                'api_key' => $apiKey,
+                'folder' => $folder,
+                'signature' => $signature
+            ];
+
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postParams);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            $result = json_decode($response, true);
+            if (isset($result['secure_url'])) {
+                $cloudinaryUrl = $result['secure_url'];
+                $stmt_insert_image->bind_param("is", $productId, $cloudinaryUrl);
                 if ($stmt_insert_image->execute()) {
-                     $uploadedImages[] = $fileName;
-                     error_log("Successfully saved image info to DB: " . $fileName);
+                     $uploadedImages[] = $cloudinaryUrl;
+                     error_log("Successfully saved Cloudinary URL to DB: " . $cloudinaryUrl);
                 } else {
-                    unlink($targetFile);
-                    error_log("Failed to save image info to database: " . $stmt_insert_image->error . " for file " . $fileName);
+                    error_log("Failed to save Cloudinary info to database: " . $stmt_insert_image->error);
                 }
             } else {
-                error_log("Failed to move uploaded file to server: " . $fileName . " Error: " . error_get_last()['message'] ?? 'Unknown error');
+                error_log("Cloudinary upload failed: " . $response);
             }
         }
     }
-     if ($stmt_insert_image) $stmt_insert_image->close();
+    
+    if ($stmt_insert_image) $stmt_insert_image->close();
     return $uploadedImages;
 }
 
@@ -110,6 +124,11 @@ function deleteProductImages($productId, $conn) {
 
     $targetDir = "uploads/";
     foreach ($images as $imageName) {
+        // Skip trying to delete local files if it's a Cloudinary URL
+        if (strpos($imageName, 'http') === 0) {
+            continue;
+        }
+
         $filePath = $targetDir . $imageName;
         if (file_exists($filePath)) {
             if (unlink($filePath)) {
@@ -117,13 +136,10 @@ function deleteProductImages($productId, $conn) {
             } else {
                 error_log("Failed to delete physical image file: " . $filePath);
             }
-        } else {
-             error_log("Image file not found to delete: " . $filePath);
         }
     }
 
     // Delete from database
-    // *** Pastikan nama tabel gambar sesuai, contoh: product_images2 ***
     $stmt = $conn->prepare("DELETE FROM product_images2 WHERE product_id = ?");
      if ($stmt === false) {
          error_log("Error preparing deleteProductImages statement: " . $conn->error);
@@ -615,7 +631,7 @@ if ($conn) {
                         <div class="mt-3 current-images-container">
                             <label class="form-label">Gambar Saat Ini:</label><br>
                             <?php foreach ($editProductImages as $imageName): ?>
-                                <img src="uploads/<?php echo htmlspecialchars($imageName); ?>"
+                                <img src="<?php echo (strpos($imageName, 'http') === 0) ? htmlspecialchars($imageName) : 'uploads/' . htmlspecialchars($imageName); ?>"
                                      alt="Gambar Produk" class="product-image-thumb">
                             <?php endforeach; ?>
                              </div>
@@ -654,7 +670,7 @@ if ($conn) {
                                 $productImages = $allProductImages[$product['id']] ?? []; // Get images for this product
                                 if (!empty($productImages)):
                                     foreach ($productImages as $imageName): ?>
-                                        <img src="uploads/<?php echo htmlspecialchars($imageName); ?>"
+                                        <img src="<?php echo (strpos($imageName, 'http') === 0) ? htmlspecialchars($imageName) : 'uploads/' . htmlspecialchars($imageName); ?>"
                                              alt="<?php echo htmlspecialchars($product['name']); ?>"
                                              class="product-image-thumb">
                                     <?php endforeach;

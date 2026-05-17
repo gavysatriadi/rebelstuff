@@ -280,7 +280,7 @@ if ($imageResult) {
                                     <?php $isActive = true; ?>
                                     <?php foreach ($productImages as $imageFilename): ?>
                                         <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>">
-                                            <img src="uploads/<?php echo htmlspecialchars($imageFilename); ?>"
+                                            <img src="<?php echo (strpos($imageFilename, 'http') === 0) ? htmlspecialchars($imageFilename) : 'uploads/' . htmlspecialchars($imageFilename); ?>"
                                                  class="d-block w-100"
                                                  alt="<?php echo $productName; ?>"
                                                  style="height: 200px; object-fit: cover;">
@@ -340,7 +340,7 @@ if ($imageResult) {
                                                      <?php $isActive = true; ?>
                                                      <?php foreach ($productImages as $imageFilename): ?>
                                                          <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>">
-                                                             <img src="uploads/<?php echo htmlspecialchars($imageFilename); ?>"
+                                                             <img src="<?php echo (strpos($imageFilename, 'http') === 0) ? htmlspecialchars($imageFilename) : 'uploads/' . htmlspecialchars($imageFilename); ?>"
                                                                   class="d-block w-100"
                                                                   alt="<?php echo $productName; ?>" style="max-height: 300px; object-fit: contain;">
                                                          </div>

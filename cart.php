@@ -194,7 +194,7 @@ $conn->close();
                     <?php foreach ($cartItemsDetails as $cartItemId => $item): ?>
                     <tr>
                         <td>
-                            <img src="uploads/<?php echo htmlspecialchars($item['image']); ?>" class="cart-item-image" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                            <img src="<?php echo (strpos($item['image'], 'http') === 0) ? htmlspecialchars($item['image']) : 'uploads/' . htmlspecialchars($item['image']); ?>" class="cart-item-image" alt="<?php echo htmlspecialchars($item['name']); ?>">
                         </td>
                         <td><?php echo htmlspecialchars($item['name']); ?></td>
                         <td>
