@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS=0;
+
 -- Table structure for table `product_images`
 
 DROP TABLE IF EXISTS `product_images`;
@@ -6,8 +8,7 @@ CREATE TABLE `product_images` (
   `product_id` int NOT NULL,
   `image_filename` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `product_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+  KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table `product_images`
@@ -60,3 +61,5 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'gavy','satriadigavy@gmail.com','$2y$10$5le4V1BB.Rhb.FQXOIjW7eE77o0mX9mqUoJDowABhmtgUe/qcUaPW',NULL,NULL,NULL,'2025-05-04 10:33:43'),(3,'admin','admin@gmail.com','$2y$10$oQ9Sk2CBhtVLse0B/YyFVemCPoxy5iXmC2CJ0Za5COF4rKn9/S/Ue',NULL,NULL,NULL,'2025-05-04 10:39:06'),(4,'akmal','akmal@gmail.com','$2y$10$TK54GDTCArUqM8gJqIV12eopIRCGnbvzKxN7.HXgdz/EzLrfBWm0C',NULL,NULL,NULL,'2025-05-04 12:03:33');
 UNLOCK TABLES;
+
+SET FOREIGN_KEY_CHECKS=1;
