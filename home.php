@@ -154,14 +154,14 @@ if ($imageResult) {
 <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="carousel-image" style="background-image: url('2.jpeg');"></div>
+      <div class="carousel-image" style="background-image: url('https://res.cloudinary.com/dohpfdgki/image/upload/q_auto/f_auto/v1779015433/rebelstuff/kglgdnl6cgwb2y4webyf.jpg');"></div>
       <div class="carousel-caption d-none d-md-block">
         <h3>Tentang Rebelstuff</h3>
         <p>Brand lokal streetwear dengan desain orisinal & kualitas terbaik.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <div class="carousel-image" style="background-image: url('3.jpeg');"></div>
+      <div class="carousel-image" style="background-image: url('https://res.cloudinary.com/dohpfdgki/image/upload/q_auto/f_auto/v1779015436/rebelstuff/n4kfz19vfd0ns22qz3o1.jpg');"></div>
       <div class="carousel-caption d-none d-md-block">
         <h3>Filosofi Desain</h3>
         <p>Desain kami membawa pesan kebebasan berekspresi dan gaya hidup urban. Desain Rebelstuff Project menggabungkan elemen-elemen estetika yang berani dengan filosofi yang mendalam.
@@ -170,7 +170,7 @@ if ($imageResult) {
       </div>
     </div>
     <div class="carousel-item">
-      <div class="carousel-image" style="background-image: url('4.jpg');"></div>
+      <div class="carousel-image" style="background-image: url('https://res.cloudinary.com/dohpfdgki/image/upload/q_auto/f_auto/v1779015441/rebelstuff/lozthwfwlxvqpr5hxweq.jpg');"></div>
       <div class="carousel-caption d-none d-md-block">
         <h3>Komitmen Kualitas</h3>
         <p>Rebelstuff Project berkomitmen untuk selalu menghadirkan produk dengan kualitas terbaik, 
@@ -193,7 +193,7 @@ if ($imageResult) {
     <div class="container" data-aos="fade-up">
         <!-- Gambar di atas teks -->
         <div class="text-center mb-4">
-            <img src="11.jpg" alt="Rebelstuff Logo" class="img-fluid" style="max-width: 600px;">
+            <img src="https://res.cloudinary.com/dohpfdgki/image/upload/q_auto/f_auto/v1779015464/rebelstuff/voco6q6rbezperg4k7ug.jpg" alt="Rebelstuff Logo" class="img-fluid" style="max-width: 600px;">
         </div>
         
         <h2 class="text-center mb-4">Tentang Kami</h2>
@@ -209,9 +209,6 @@ if ($imageResult) {
         </p>
     </div>
 </section>
-
-
-
 
 <section class="py-5" id="alamat">
     <div class="container" data-aos="fade-up"> <h2 class="text-center mb-4">Alamat Toko Kami</h2>
@@ -300,7 +297,7 @@ if ($imageResult) {
                                 <?php endif; ?>
                             </div>
                         <?php else: ?>
-                             <img src="uploads/placeholder.jpg" class="card-img-top" alt="Tidak ada gambar" style="height: 200px; object-fit: cover;">
+                             <img src="https://res.cloudinary.com/dohpfdgki/image/upload/q_auto/f_auto/v1779015507/rebelstuff/w98akimzoypiucet7u5u.jpg" class="card-img-top" alt="Tidak ada gambar" style="height: 200px; object-fit: cover;">
                         <?php endif; ?>
                        <div class="card-body d-flex flex-column">
                 <h5 class="card-title"><?php echo $productName; ?></h5>
@@ -359,7 +356,7 @@ if ($imageResult) {
                                                 <?php endif; ?>
                                              </div>
                                          <?php else: ?>
-                                              <img src="uploads/placeholder.jpg" class="img-fluid" alt="Tidak ada gambar" style="max-height: 300px; object-fit: contain;">
+                                              <img src="https://res.cloudinary.com/dohpfdgki/image/upload/q_auto/f_auto/v1779015507/rebelstuff/w98akimzoypiucet7u5u.jpg" class="img-fluid" alt="Tidak ada gambar" style="max-height: 300px; object-fit: contain;">
                                          <?php endif; ?>
                                      </div>
                                     <div class="col-md-7">

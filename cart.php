@@ -86,7 +86,7 @@ if (!empty($cart)) {
                     'size' => $size,
                     'qty' => $quantity,
                     'subtotal' => $subtotal,
-                    'image' => $productImages[$productId] ?? 'placeholder.jpg' // Ambil gambar atau placeholder
+                    'image' => $productImages[$productId] ?? 'https://res.cloudinary.com/dohpfdgki/image/upload/q_auto/f_auto/v1779015507/rebelstuff/w98akimzoypiucet7u5u.jpg' // Ambil gambar atau placeholder
                 ];
             } else {
                  // Handle case where product ID in session doesn't exist in DB

@@ -13,7 +13,7 @@ CREATE TABLE `product_images` (
 -- Dumping data for table `product_images`
 
 LOCK TABLES `product_images` WRITE;
-INSERT INTO `product_images` VALUES (10,27,'cam4.jpg'),(11,27,'cam5.jpg'),(12,28,'38dc8404-6ecf-4d75-9efc-d6611e4da063.png'),(13,28,'7886F2D5-FC49-4A96-9668-550C41191255.jpeg'),(14,29,'34a2450b556268fd8159081518d1b64d.jpg'),(15,29,'38dc8404-6ecf-4d75-9efc-d6611e4da063.png'),(16,30,'voucherexam.png'),(17,31,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779014476/rebelstuff/eylznamdiysea4h4t5ub.png'),(18,32,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779014618/rebelstuff/ukqbawyun01fbupvxqls.png');
+INSERT INTO `product_images` VALUES (10,27,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779015469/rebelstuff/tk2ddyxzsrwhrw0ihkul.jpg'),(11,27,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779015472/rebelstuff/doqcpva3ekipl5ze0qmr.jpg'),(12,28,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779015474/rebelstuff/uvqaztdwg0vma6qzfzba.jpg'),(13,28,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779015476/rebelstuff/rbaqqmwjcpccxsjxyyfe.jpg'),(14,29,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779015478/rebelstuff/tzvt2luhdr1wtky7ukxn.jpg'),(15,29,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779015481/rebelstuff/x4xeye9e97rw5qf8vlp2.jpg'),(16,30,'voucherexam.png'),(17,31,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779014476/rebelstuff/eylznamdiysea4h4t5ub.png'),(18,32,'https://res.cloudinary.com/dohpfdgki/image/upload/v1779014618/rebelstuff/ukqbawyun01fbupvxqls.png');
 UNLOCK TABLES;
 
 -- Table structure for table `products`
