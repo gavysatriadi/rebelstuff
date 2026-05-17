@@ -25,7 +25,7 @@ function uploadImages($files, $productId, $conn) {
     $errors = $files['error'];
     $fileCounts = count($fileNames);
 
-    $stmt_insert_image = $conn->prepare("INSERT INTO product_images2 (product_id, image_filename) VALUES (?, ?)");
+    $stmt_insert_image = $conn->prepare("INSERT INTO product_images (product_id, image_filename) VALUES (?, ?)");
     if ($stmt_insert_image === false) {
         error_log("Error preparing INSERT statement for images: " . $conn->error);
         return false;
@@ -102,8 +102,8 @@ function uploadImages($files, $productId, $conn) {
 // Fungsi untuk mendapatkan gambar produk
 function getProductImages($productId, $conn) {
     $images = [];
-    // *** Pastikan nama tabel gambar sesuai, contoh: product_images2 ***
-    $stmt = $conn->prepare("SELECT image_filename FROM product_images2 WHERE product_id = ?");
+    // *** Pastikan nama tabel gambar sesuai, contoh: product_images ***
+    $stmt = $conn->prepare("SELECT image_filename FROM product_images WHERE product_id = ?");
     if ($stmt === false) {
          error_log("Error preparing getProductImages statement: " . $conn->error);
          return $images;
@@ -140,7 +140,7 @@ function deleteProductImages($productId, $conn) {
     }
 
     // Delete from database
-    $stmt = $conn->prepare("DELETE FROM product_images2 WHERE product_id = ?");
+    $stmt = $conn->prepare("DELETE FROM product_images WHERE product_id = ?");
      if ($stmt === false) {
          error_log("Error preparing deleteProductImages statement: " . $conn->error);
          return false;
@@ -339,9 +339,9 @@ if ($result) {
 
 
 // Fetch all images and organize them by product ID
-// *** Pastikan nama tabel gambar sesuai, contoh: product_images2 ***
+// *** Pastikan nama tabel gambar sesuai, contoh: product_images ***
 $allProductImages = [];
-$imageResult = $conn->query("SELECT product_id, image_filename FROM product_images2 ORDER BY product_id");
+$imageResult = $conn->query("SELECT product_id, image_filename FROM product_images ORDER BY product_id");
 if ($imageResult) {
     while ($row = $imageResult->fetch_assoc()) {
         $allProductImages[$row['product_id']][] = $row['image_filename'];

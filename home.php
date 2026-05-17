@@ -13,9 +13,9 @@ if ($result) {
 }
 
 // --- Mengambil Semua Data Gambar dan Mengorganisir per Produk ---
-// Menggunakan tabel product_images2 sesuai kode admin terakhir Anda
+// Menggunakan tabel product_images sesuai kode admin terakhir Anda
 $allProductImages = [];
-$imageResult = $conn->query("SELECT product_id, image_filename FROM product_images2 ORDER BY product_id"); // Ambil semua gambar
+$imageResult = $conn->query("SELECT product_id, image_filename FROM product_images ORDER BY product_id"); // Ambil semua gambar
 if ($imageResult) {
     while ($imgRow = $imageResult->fetch_assoc()) {
         $allProductImages[$imgRow['product_id']][] = $imgRow['image_filename']; // Kelompokkan berdasarkan product_id

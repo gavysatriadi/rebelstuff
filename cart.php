@@ -44,13 +44,13 @@ if (!empty($cart)) {
         $stmt->close();
 
         // Ambil gambar thumbnail pertama untuk setiap produk di keranjang
-        // Menggunakan tabel product_images2
+        // Menggunakan tabel product_images
          $productImages = [];
          if (!empty($productsData)) {
              $imagePlaceholders = implode(',', array_fill(0, count($productsData), '?'));
              $imageTypes = str_repeat('i', count($productsData));
              // Query hanya mengambil gambar pertama (LIMIT 1) untuk setiap product_id
-             $stmt_img = $conn->prepare("SELECT product_id, MIN(image_filename) AS image_filename FROM product_images2 WHERE product_id IN ($imagePlaceholders) GROUP BY product_id"); // GROUP BY atau order by dan limit 1 per id
+             $stmt_img = $conn->prepare("SELECT product_id, MIN(image_filename) AS image_filename FROM product_images WHERE product_id IN ($imagePlaceholders) GROUP BY product_id"); // GROUP BY atau order by dan limit 1 per id
              if ($stmt_img === false) {
                   error_log("Error preparing image fetch for cart: " . $conn->error);
              } else {

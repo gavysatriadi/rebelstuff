@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Ambil data user dari database
-    $stmt = $conn->prepare("SELECT id, username, password_hash FROM users1 WHERE username = ?");
+    $stmt = $conn->prepare("SELECT id, username, password_hash FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
