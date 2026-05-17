@@ -2,15 +2,7 @@
 // index.php (atau home.php)
 
 // Koneksi ke database
-$host = 'localhost';
-$db = 'rebelstuff';
-$user = 'root';
-$pass = '';
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+require_once 'koneksi.php';
 
 // --- Mengambil Data Produk ---
 $products = [];

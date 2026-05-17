@@ -10,6 +10,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+SET FOREIGN_KEY_CHECKS = 0;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `customer_name` varchar(100) DEFAULT NULL,
@@ -41,6 +43,7 @@ CREATE TABLE `orders` (
 -- Table structure for table `orders2`
 --
 
+DROP TABLE IF EXISTS `orders2`;
 CREATE TABLE `orders2` (
   `id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
@@ -61,6 +64,7 @@ INSERT INTO `orders2` (`id`, `name`, `phone`, `created_at`) VALUES
 -- Table structure for table `order_items`
 --
 
+DROP TABLE IF EXISTS `order_items`;
 CREATE TABLE `order_items` (
   `id` int(11) NOT NULL,
   `order_id` int(11) DEFAULT NULL,
@@ -76,6 +80,7 @@ CREATE TABLE `order_items` (
 -- Table structure for table `order_items2`
 --
 
+DROP TABLE IF EXISTS `order_items2`;
 CREATE TABLE `order_items2` (
   `id` int(11) NOT NULL,
   `order_id` int(11) DEFAULT NULL,
@@ -90,6 +95,7 @@ CREATE TABLE `order_items2` (
 -- Table structure for table `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -117,6 +123,7 @@ INSERT INTO `products` (`id`, `name`, `price`, `description`, `created_at`, `ima
 -- Table structure for table `product_images2`
 --
 
+DROP TABLE IF EXISTS `product_images2`;
 CREATE TABLE `product_images2` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -141,6 +148,7 @@ INSERT INTO `product_images2` (`id`, `product_id`, `image_filename`) VALUES
 -- Table structure for table `product_variants`
 --
 
+DROP TABLE IF EXISTS `product_variants`;
 CREATE TABLE `product_variants` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -154,6 +162,7 @@ CREATE TABLE `product_variants` (
 -- Table structure for table `users1`
 --
 
+DROP TABLE IF EXISTS `users1`;
 CREATE TABLE `users1` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -312,6 +321,7 @@ ALTER TABLE `product_images2`
 ALTER TABLE `product_variants`
   ADD CONSTRAINT `product_variants_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 COMMIT;
+SET FOREIGN_KEY_CHECKS = 1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

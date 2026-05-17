@@ -25,16 +25,7 @@ if ($productId <= 0 || $quantity <= 0) {
 }
 
 // --- Koneksi Database (Aktifkan biar validasi jalan) ---
-$host = 'localhost';
-$db = 'rebelstuff'; // pastiin sama kayak home.php lo
-$user = 'root';
-$pass = '';
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    echo json_encode(['success' => false, 'message' => 'Gagal terhubung ke database.']);
-    exit();
-}
+require_once 'koneksi.php';
 
 $stmt = $conn->prepare("SELECT name, price FROM products WHERE id = ?");
 $stmt->bind_param("i", $productId);

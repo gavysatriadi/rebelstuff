@@ -2,15 +2,7 @@
 // Mulai sesi jika belum dimulai
 session_start();
 
-$host = 'localhost';
-$db = 'rebelstuff';
-$user = 'root';
-$pass = '';
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+require_once 'koneksi.php';
 
 $message = '';
 

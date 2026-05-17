@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';     // host database
 $user = 'root';          // username database
-$pass = '';              // password database (kosongkan jika default XAMPP)
+$pass = '123456';        // password database (kosongkan jika default XAMPP)
 $db   = 'rebelstuff';    // nama database kamu
 
 $conn = new mysqli($host, $user, $pass, $db);

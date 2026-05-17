@@ -3,15 +3,7 @@
 session_start(); // Mulai sesi untuk mengakses $_SESSION['cart']
 
 // Koneksi ke database
-$host = 'localhost';
-$db = 'rebelstuff';
-$user = 'root';
-$pass = '';
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+require_once 'koneksi.php';
 
 // Ambil data keranjang dari sesi
 $cart = $_SESSION['cart'] ?? []; // Ambil keranjang, default array kosong jika belum ada

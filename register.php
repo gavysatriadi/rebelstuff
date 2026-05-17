@@ -1,16 +1,5 @@
 <?php
-$host = 'localhost';
-$db = 'rebelstuff';
-$user = 'root'; // Ganti dengan user MySQL kamu
-$pass = '';     // Ganti dengan password MySQL kamu
-
-// Koneksi ke database
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+require_once 'koneksi.php';
 
 // Handle form submit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
