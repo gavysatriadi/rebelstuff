@@ -3,7 +3,7 @@
 
 // Koneksi ke database
 $host = 'localhost';
-$db = 'rebelstuffrev';
+$db = 'rebelstuff';
 $user = 'root';
 $pass = '';
 

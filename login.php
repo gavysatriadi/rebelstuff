@@ -2,7 +2,7 @@
 session_start();
 
 $host = 'localhost';
-$db = 'rebelstuffrev';
+$db = 'rebelstuff';
 $user = 'root'; // Ganti dengan username MySQL kamu
 $pass = '';     // Ganti dengan password MySQL kamu
 

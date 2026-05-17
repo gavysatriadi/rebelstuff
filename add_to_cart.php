@@ -26,7 +26,7 @@ if ($productId <= 0 || $quantity <= 0) {
 
 // --- Koneksi Database (Aktifkan biar validasi jalan) ---
 $host = 'localhost';
-$db = 'rebelstuffrev'; // pastiin sama kayak home.php lo
+$db = 'rebelstuff'; // pastiin sama kayak home.php lo
 $user = 'root';
 $pass = '';
 $conn = new mysqli($host, $user, $pass, $db);

@@ -3,7 +3,7 @@
 session_start();
 
 $host = 'localhost';
-$db = 'rebelstuffrev';
+$db = 'rebelstuff';
 $user = 'root';
 $pass = '';
 $conn = new mysqli($host, $user, $pass, $db);
